@@ -33,7 +33,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <div className="font-bold text-slate-900 mb-1 text-base md:text-lg">Email Us</div>
-                  <div className="text-sm md:text-base text-slate-600">hello@alvitech.com</div>
+                  <div className="text-sm md:text-base text-slate-600">info@alvitech.com</div>
                 </div>
               </div>
               

@@ -43,7 +43,7 @@ const CTA = () => {
               <ArrowRight size={22} />
             </a>
             <a
-              href="https://wa.me/yournumber"
+              href="https://wa.me/923075579807"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:bg-white/20 transition-all active:scale-95 flex items-center justify-center gap-2"
