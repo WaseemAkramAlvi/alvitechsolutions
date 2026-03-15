@@ -5,10 +5,13 @@ import {
   Settings, 
   Users, 
   BarChart3, 
-  Package, 
-  Truck,
   Brain,
-  Cpu
+  Cpu,
+  FileUser,
+  Palette,
+  Video,
+  Megaphone,
+  FileSpreadsheet
 } from 'lucide-react';
 
 const services = [
@@ -31,22 +34,40 @@ const services = [
     color: 'bg-cyan-500',
   },
   {
-    title: 'ERP Systems',
-    description: 'Integrated enterprise resource planning systems to streamline your entire business workflow.',
+    title: 'Digital Marketing',
+    description: 'Strategic online marketing to grow your brand presence and reach more customers.',
+    icon: Megaphone,
+    color: 'bg-rose-500',
+  },
+  {
+    title: 'Graphics Designing',
+    description: 'Creative visual designs, logos, and branding materials that make your business stand out.',
+    icon: Palette,
+    color: 'bg-pink-500',
+  },
+  {
+    title: 'Video Editing',
+    description: 'Professional video editing and production for social media, ads, and corporate use.',
+    icon: Video,
+    color: 'bg-red-500',
+  },
+  {
+    title: 'ERP & CRM Systems',
+    description: 'Integrated systems to streamline your business workflow and customer relations.',
     icon: Settings,
     color: 'bg-purple-500',
   },
   {
-    title: 'CRM Systems',
-    description: 'Powerful customer relationship management tools to boost sales and client satisfaction.',
-    icon: Users,
-    color: 'bg-indigo-500',
+    title: 'CV Making',
+    description: 'Professional resume and CV writing services to help you land your dream job.',
+    icon: FileUser,
+    color: 'bg-emerald-500',
   },
   {
-    title: 'Automation Dashboards',
-    description: 'Real-time data visualization and process automation to make informed decisions.',
-    icon: BarChart3,
-    color: 'bg-emerald-500',
+    title: 'Office Work Solutions',
+    description: 'Expert solutions for Word, Excel, and PowerPoint tasks to boost your productivity.',
+    icon: FileSpreadsheet,
+    color: 'bg-orange-500',
   },
 ];
 

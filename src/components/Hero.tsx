@@ -31,7 +31,7 @@ const Hero = () => {
           </h1>
           
           <p className="text-base md:text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-            We build powerful web systems, <strong>AI-driven applications</strong>, and <strong>IoT solutions</strong> that automate operations, improve efficiency, and help businesses grow faster.
+            We build powerful web systems, <strong>AI-driven applications</strong>, and <strong>IoT solutions</strong>. We also provide professional <strong>Graphics Design</strong>, <strong>Video Editing</strong>, <strong>Digital Marketing</strong>, and <strong>Office Work</strong> solutions to help your business excel.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
