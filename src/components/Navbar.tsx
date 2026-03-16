@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Rocket } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import Logo from '../assets/Logo.svg';
 import { cn } from '@/src/lib/utils';
 
 const Navbar = () => {
@@ -31,13 +32,8 @@ const Navbar = () => {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-            <Rocket size={24} />
-          </div>
-          <span className="font-display font-bold text-xl tracking-tight">
-            AlviTech<span className="text-primary">Solutions</span>
-          </span>
+        <a href="/" className="flex items-center">
+          <img src={Logo} alt="Logo" className="h-12 w-auto object-contain" />
         </a>
 
         {/* Desktop Nav */}
