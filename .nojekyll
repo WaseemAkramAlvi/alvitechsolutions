@@ -1,0 +1,7 @@
+// vite.config.ts already exists, so we only need to add the base path for GitHub Pages deployment.
+// This file is required by GitHub Pages to know which folder to serve.
+// It should match the repository name if deploying to user/org site, or custom domain if using CNAME.
+// We'll set the base to "/" if CNAME exists, otherwise to "/alvitechsolutions/".
+
+// This file is only needed if you want to override the default behavior.
+// For now, we will update vite.config.ts directly.
