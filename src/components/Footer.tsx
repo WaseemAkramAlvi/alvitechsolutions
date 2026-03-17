@@ -1,5 +1,6 @@
 import React from 'react';
 import { Rocket, Twitter, Linkedin, Github, Facebook, Phone, MapPin, Mail } from 'lucide-react';
+import Logo from '../assets/Logo.svg';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,13 +10,8 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 lg:col-span-1">
-            <a href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
-                <Rocket size={24} />
-              </div>
-              <span className="font-display font-bold text-xl tracking-tight text-white">
-                AlviTech<span className="text-primary">Solutions</span>
-              </span>
+            <a href="/" className="flex items-center mb-6">
+              <img src={Logo} alt="AlviTech Solutions" className="h-14 w-auto object-contain" />
             </a>
             <p className="text-sm leading-relaxed mb-8">
               We build custom web applications that automate business processes and increase profit. Your partner in digital transformation.
