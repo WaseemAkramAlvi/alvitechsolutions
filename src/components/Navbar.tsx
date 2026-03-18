@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X } from 'lucide-react';
-import Logo from '../assets/Logo.svg';
+import { Menu, X, Rocket, FileText, Sparkles } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === '/';
+
+  const handleContactClick = () => {
+    if (isHome) {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,13 +47,18 @@ const Navbar = () => {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" className="flex items-center">
-          <img src={Logo} alt="Logo" className="h-12 w-auto object-contain" />
-        </a>
+        <Link to="/" className="flex items-center gap-2 group">
+          <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+            <Rocket size={24} />
+          </div>
+          <span className="font-display font-bold text-xl tracking-tight">
+            AlviTech<span className="text-primary">Solutions</span>
+          </span>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+          {isHome && navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
@@ -47,12 +67,24 @@ const Navbar = () => {
               {link.name}
             </a>
           ))}
-          <a
-            href="#contact"
+          <Link
+            to="/ai-tools"
+            className={cn(
+              "flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-xl transition-all",
+              location.pathname.startsWith('/ai-tools') || location.pathname === '/cv-builder'
+                ? "bg-primary text-white shadow-lg shadow-primary/20"
+                : "text-slate-600 hover:text-primary hover:bg-primary/5"
+            )}
+          >
+            <Sparkles size={16} />
+            Free AI Tools
+          </Link>
+          <button
+            onClick={handleContactClick}
             className="bg-slate-900 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-slate-800 transition-all hover:shadow-lg active:scale-95"
           >
             Get Consultation
-          </a>
+          </button>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -74,7 +106,7 @@ const Navbar = () => {
             className="absolute top-full left-0 right-0 bg-white border-t border-slate-100 shadow-xl p-6 md:hidden"
           >
             <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
+              {isHome && navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
@@ -84,13 +116,20 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <a
-                href="#contact"
+              <Link
+                to="/ai-tools"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="bg-primary text-white px-6 py-3 rounded-xl text-center font-bold"
+                className="flex items-center justify-center gap-2 text-lg font-bold text-primary bg-primary/5 py-3 rounded-xl"
+              >
+                <Sparkles size={20} />
+                Free AI Tools
+              </Link>
+              <button
+                onClick={handleContactClick}
+                className="bg-primary text-white px-6 py-3 rounded-xl text-center font-bold w-full"
               >
                 Get Started
-              </a>
+              </button>
             </div>
           </motion.div>
         )}
