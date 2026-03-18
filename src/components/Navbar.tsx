@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Rocket, FileText, Sparkles } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import logo from '../assets/Logo.svg';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,18 +43,13 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 print:hidden',
         isScrolled ? 'glass py-3 shadow-sm' : 'bg-transparent'
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-            <Rocket size={24} />
-          </div>
-          <span className="font-display font-bold text-xl tracking-tight">
-            AlviTech<span className="text-primary">Solutions</span>
-          </span>
+        <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center group">
+          <img src={logo} alt="AlviTech Solutions" className="h-10 w-auto group-hover:scale-105 transition-transform" />
         </Link>
 
         {/* Desktop Nav */}
@@ -70,13 +66,13 @@ const Navbar = () => {
           <Link
             to="/ai-tools"
             className={cn(
-              "flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-xl transition-all",
+              "flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full transition-all active:scale-95",
               location.pathname.startsWith('/ai-tools') || location.pathname === '/cv-builder'
-                ? "bg-primary text-white shadow-lg shadow-primary/20"
-                : "text-slate-600 hover:text-primary hover:bg-primary/5"
+                ? "bg-primary text-white shadow-lg shadow-primary/30"
+                : "bg-primary/10 text-primary hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/30"
             )}
           >
-            <Sparkles size={16} />
+            <Sparkles size={16} className={location.pathname.startsWith('/ai-tools') || location.pathname === '/cv-builder' ? "animate-pulse" : ""} />
             Free AI Tools
           </Link>
           <button
@@ -119,7 +115,7 @@ const Navbar = () => {
               <Link
                 to="/ai-tools"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 text-lg font-bold text-primary bg-primary/5 py-3 rounded-xl"
+                className="flex items-center justify-center gap-2 text-lg font-bold text-primary bg-primary/10 hover:bg-primary hover:text-white transition-colors py-3 rounded-xl border border-primary/20 hover:border-primary shadow-sm"
               >
                 <Sparkles size={20} />
                 Free AI Tools

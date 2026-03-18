@@ -1,22 +1,20 @@
 import React from 'react';
 import { Rocket, Twitter, Linkedin, Github, Facebook, Phone, MapPin, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/Logo.svg';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-950 text-slate-400 py-20">
+    <footer className="bg-slate-950 text-slate-400 py-20 print:hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-6 group">
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
-                <Rocket size={22} />
+            <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="block mb-6 group">
+              <div className="bg-white p-3 rounded-2xl inline-flex group-hover:scale-105 transition-transform shadow-lg shadow-white/5">
+                <img src={logo} alt="AlviTech Solutions" className="h-8 w-auto" />
               </div>
-              <span className="font-bold text-xl text-white">
-                AlviTech<span className="text-primary">Solutions</span>
-              </span>
             </Link>
             <p className="text-sm leading-relaxed mb-8">
               We build custom web applications that automate business processes and increase profit. Your partner in digital transformation.

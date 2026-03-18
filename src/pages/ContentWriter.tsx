@@ -13,8 +13,6 @@ import {
     Share2
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { GoogleGenAI } from "@google/genai";
 import { cn } from '@/src/lib/utils';
 
@@ -70,8 +68,7 @@ const ContentWriter = () => {
     const tones = ['Professional', 'Creative', 'Friendly', 'Urgent', 'Informative'];
 
     return (
-        <div className="min-h-screen bg-slate-50">
-            <Navbar />
+        <div className="bg-slate-50 h-full">
 
             <main className="pt-32 pb-24 px-6">
                 <div className="max-w-6xl mx-auto">
@@ -207,8 +204,6 @@ const ContentWriter = () => {
                     </div>
                 </div>
             </main>
-
-            <Footer />
         </div>
     );
 };

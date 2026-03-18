@@ -44,10 +44,10 @@ const CVBuilderPromo = () => {
                             </ul>
 
                             <Link
-                                to="/ai-tools"
+                                to="/cv-builder"
                                 className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-primary-dark transition-all shadow-xl shadow-primary/20 active:scale-95"
                             >
-                                Explore AI Toolkit
+                                Start Building for Free
                                 <ArrowRight size={20} />
                             </Link>
                         </motion.div>

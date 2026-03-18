@@ -9,8 +9,6 @@ import {
     Scissors
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { cn } from '@/src/lib/utils';
 
 const tools = [
@@ -21,32 +19,34 @@ const tools = [
         icon: FileText,
         color: 'bg-blue-500',
         link: '/cv-builder',
-        badge: 'Popular'
+        badge: 'Popular',
+        disabled: false
     },
     {
         id: 'bg-remover',
         name: 'AI Background Remover',
         description: 'Remove backgrounds from your images instantly using advanced AI models.',
         icon: Scissors,
-        color: 'bg-purple-500',
+        color: 'bg-slate-400',
         link: '/ai-tools/bg-remover',
-        badge: 'New'
+        badge: 'Disabled',
+        disabled: true
     },
     {
         id: 'content-gen',
         name: 'AI Content Writer',
         description: 'Generate high-quality marketing copy, blog posts, and emails in seconds.',
         icon: Wand2,
-        color: 'bg-emerald-500',
+        color: 'bg-slate-400',
         link: '/ai-tools/content-writer',
-        badge: 'AI Powered'
+        badge: 'Disabled',
+        disabled: true
     }
 ];
 
 const AITools = () => {
     return (
-        <div className="min-h-screen bg-slate-50">
-            <Navbar />
+        <div className="bg-slate-50 h-full">
 
             <main className="pt-32 pb-24 px-6">
                 <div className="max-w-7xl mx-auto">
@@ -76,35 +76,51 @@ const AITools = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                className="group relative bg-white rounded-[2.5rem] p-8 border border-slate-200 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/5"
+                                className={cn(
+                                    "group relative bg-white rounded-[2.5rem] p-8 border border-slate-200 transition-all",
+                                    !tool.disabled ? "hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5" : "opacity-75"
+                                )}
                             >
                                 <div className={cn(
                                     "w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-8 shadow-lg",
-                                    tool.color
+                                    tool.color,
+                                    tool.disabled && "opacity-50 grayscale"
                                 )}>
                                     <tool.icon size={32} />
                                 </div>
 
                                 {tool.badge && (
-                                    <span className="absolute top-8 right-8 bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                                    <span className={cn(
+                                        "absolute top-8 right-8 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider",
+                                        tool.disabled ? "bg-slate-100 text-slate-400" : "bg-slate-100 text-slate-600"
+                                    )}>
                                         {tool.badge}
                                     </span>
                                 )}
 
-                                <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-primary transition-colors">
+                                <h3 className={cn(
+                                    "text-2xl font-bold mb-4 transition-colors",
+                                    tool.disabled ? "text-slate-500" : "text-slate-900 group-hover:text-primary"
+                                )}>
                                     {tool.name}
                                 </h3>
                                 <p className="text-slate-600 mb-8 leading-relaxed">
                                     {tool.description}
                                 </p>
 
-                                <Link
-                                    to={tool.link}
-                                    className="inline-flex items-center gap-2 font-bold text-primary group-hover:gap-3 transition-all"
-                                >
-                                    Launch Tool
-                                    <ArrowRight size={20} />
-                                </Link>
+                                {tool.disabled ? (
+                                    <div className="inline-flex items-center gap-2 font-bold text-slate-400">
+                                        Temporarily Disabled
+                                    </div>
+                                ) : (
+                                    <Link
+                                        to={tool.link}
+                                        className="inline-flex items-center gap-2 font-bold text-primary group-hover:gap-3 transition-all"
+                                    >
+                                        Launch Tool
+                                        <ArrowRight size={20} />
+                                    </Link>
+                                )}
                             </motion.div>
                         ))}
                     </div>
@@ -150,8 +166,6 @@ const AITools = () => {
                     </div>
                 </div>
             </main>
-
-            <Footer />
         </div>
     );
 };

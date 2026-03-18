@@ -25,11 +25,11 @@ const Hero = () => {
             </span>
             Next-Gen Web Solutions
           </div>
-          
+
           <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6">
             Transform Your Business with <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Custom Web Apps</span>
           </h1>
-          
+
           <p className="text-base md:text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
             We build powerful web systems, <strong>AI-driven applications</strong>, and <strong>IoT solutions</strong>. We also provide professional <strong>Graphics Design</strong>, <strong>Video Editing</strong>, <strong>Digital Marketing</strong>, and <strong>Office Work</strong> solutions to help your business excel.
           </p>
@@ -83,27 +83,101 @@ const Hero = () => {
                   <div className="w-6 h-6 md:w-8 md:h-8 bg-slate-700 rounded-full" />
                 </div>
                 <div className="grid grid-cols-3 gap-3 md:gap-4">
-                  <div className="h-16 md:h-24 bg-primary/20 rounded-xl border border-primary/30" />
-                  <div className="h-16 md:h-24 bg-slate-800 rounded-xl" />
-                  <div className="h-16 md:h-24 bg-slate-800 rounded-xl" />
+                  <div className="h-16 md:h-24 bg-primary/20 rounded-xl border border-primary/30 p-3 flex flex-col justify-between">
+                    <span className="text-[8px] md:text-[10px] text-primary/70 font-bold uppercase tracking-wider">Projects</span>
+                    <div>
+                      <div className="text-lg md:text-2xl font-bold text-primary">120+</div>
+                      <div className="text-[7px] md:text-[9px] text-primary/60">Completed</div>
+                    </div>
+                  </div>
+                  <div className="h-16 md:h-24 bg-slate-800 rounded-xl p-3 flex flex-col justify-between">
+                    <span className="text-[8px] md:text-[10px] text-slate-400 font-bold uppercase tracking-wider">Clients</span>
+                    <div>
+                      <div className="text-lg md:text-2xl font-bold text-white">85+</div>
+                      <div className="text-[7px] md:text-[9px] text-slate-500">Worldwide</div>
+                    </div>
+                  </div>
+                  <div className="h-16 md:h-24 bg-slate-800 rounded-xl p-3 flex flex-col justify-between">
+                    <span className="text-[8px] md:text-[10px] text-emerald-400 font-bold uppercase tracking-wider">Growth</span>
+                    <div>
+                      <div className="text-lg md:text-2xl font-bold text-emerald-400">+120%</div>
+                      <div className="text-[7px] md:text-[9px] text-slate-500">This Year</div>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex-1 bg-slate-800/50 rounded-xl p-3 md:p-4">
-                   <div className="w-full h-full flex items-end gap-1 md:gap-2">
-                      {[40, 70, 45, 90, 65, 80, 50].map((h, i) => (
-                        <motion.div 
-                          key={i}
+                <div className="flex-1 bg-slate-800/50 rounded-xl p-3 md:p-4 relative">
+                  {/* Growth label */}
+                  <div className="absolute top-2 right-2 flex items-center gap-1 bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-[7px] md:text-[9px] font-bold px-2 py-0.5 rounded-full">
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                      <path d="M1 7L3.5 2.5L5.5 5L7 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    Grow Your Business
+                  </div>
+
+                  {/* Bars - strictly upward */}
+                  <div className="w-full h-full flex items-end gap-1 md:gap-2">
+                    {[20, 32, 45, 56, 68, 80, 92].map((h, i) => (
+                      <div key={i} className="flex-1 flex flex-col items-center justify-end h-full">
+                        <motion.span
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.5 + i * 0.1 + 1, duration: 0.4 }}
+                          className="text-[8px] md:text-[10px] text-primary font-bold mb-0.5"
+                        >
+                          {h}%
+                        </motion.span>
+                        <motion.div
                           initial={{ height: 0 }}
                           animate={{ height: `${h}%` }}
                           transition={{ delay: 0.5 + i * 0.1, duration: 1 }}
-                          className="flex-1 bg-primary/40 rounded-t-sm" 
+                          className="w-full bg-primary/40 rounded-t-sm"
                         />
-                      ))}
-                   </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* SVG Trend Line Overlay */}
+                  <svg
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    viewBox="0 0 280 120"
+                    preserveAspectRatio="none"
+                  >
+                    <defs>
+                      <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="#10b981" stopOpacity="1" />
+                      </linearGradient>
+                    </defs>
+                    <motion.polyline
+                      points="20,115 60,100 100,82 140,62 180,42 220,24 260,8"
+                      fill="none"
+                      stroke="url(#lineGrad)"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ delay: 1.5, duration: 1.5, ease: "easeInOut" }}
+                    />
+                    {/* Dots at each data point */}
+                    {[
+                      [20, 115], [60, 100], [100, 82], [140, 62], [180, 42], [220, 24], [260, 8]
+                    ].map(([x, y], i) => (
+                      <motion.circle
+                        key={i}
+                        cx={x} cy={y} r="3"
+                        fill="#10b981"
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 1.5 + i * 0.2, duration: 0.3 }}
+                      />
+                    ))}
+                  </svg>
                 </div>
               </div>
             </div>
           </div>
-          
+
           {/* Floating Elements - Hidden on small mobile */}
           <motion.div
             animate={{ y: [0, -15, 0] }}

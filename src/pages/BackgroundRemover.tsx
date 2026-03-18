@@ -11,17 +11,17 @@ import {
     Scissors
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 
 const BackgroundRemover = () => {
     const [image, setImage] = useState<string | null>(null);
+    const [imageFile, setImageFile] = useState<File | null>(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [result, setResult] = useState<string | null>(null);
 
     const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
+            setImageFile(file);
             const reader = new FileReader();
             reader.onload = (event) => {
                 setImage(event.target?.result as string);
@@ -31,23 +31,67 @@ const BackgroundRemover = () => {
         }
     };
 
-    const processImage = () => {
+    const processImage = async () => {
+        if (!imageFile) return;
         setIsProcessing(true);
-        // Simulate AI processing
-        setTimeout(() => {
-            setResult(image); // In a real app, this would be the processed image from an API
+
+        const apiKey = import.meta.env.VITE_HUGGINGFACE_API_KEY;
+        if (!apiKey) {
+            alert("Error: Hugging Face API key is missing. Please set VITE_HUGGINGFACE_API_KEY in your .env file.");
             setIsProcessing(false);
-        }, 2000);
+            return;
+        }
+
+        try {
+            // We use native fetch because the @huggingface/inference SDK was causing OOM errors during Vite build
+            const response = await fetch(
+                "/api/hf/models/briaai/RMBG-1.4",
+                {
+                    headers: {
+                        Authorization: `Bearer ${apiKey}`,
+                    },
+                    method: "POST",
+                    body: imageFile, // Sending the File directly as binary payload
+                }
+            );
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error("Hugging Face API Error:", errorText);
+
+                // Check if it's a model loading error
+                try {
+                    const errorJson = JSON.parse(errorText);
+                    if (errorJson.error && errorJson.error.includes("loading")) {
+                        throw new Error(`Model is currently loading. Please wait ${Math.ceil(errorJson.estimated_time || 20)} seconds and try again.`);
+                    }
+                } catch (e) {
+                    // Not JSON, just continue
+                }
+
+                throw new Error(`API error: ${response.status} ${response.statusText}`);
+            }
+
+            const blob = await response.blob();
+            const url = URL.createObjectURL(blob);
+            setResult(url);
+        } catch (error) {
+            console.error("Background removal failed:", error);
+            const errorMessage = error instanceof Error ? error.message : "Background removal failed.";
+            alert(`Background removal failed: ${errorMessage}`);
+        } finally {
+            setIsProcessing(false);
+        }
     };
 
     const reset = () => {
         setImage(null);
+        setImageFile(null);
         setResult(null);
     };
 
     return (
-        <div className="min-h-screen bg-slate-50">
-            <Navbar />
+        <div className="bg-slate-50 h-full">
 
             <main className="pt-32 pb-24 px-6">
                 <div className="max-w-5xl mx-auto">
@@ -147,7 +191,15 @@ const BackgroundRemover = () => {
                                 </div>
 
                                 {result && (
-                                    <button className="w-full mt-6 bg-slate-900 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-xl active:scale-95">
+                                    <button
+                                        onClick={() => {
+                                            const a = document.createElement("a");
+                                            a.href = result;
+                                            a.download = "background_removed.png";
+                                            a.click();
+                                        }}
+                                        className="w-full mt-6 bg-slate-900 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-xl active:scale-95"
+                                    >
                                         <Download size={20} />
                                         Download PNG
                                     </button>
@@ -182,8 +234,6 @@ const BackgroundRemover = () => {
                     </div>
                 </div>
             </main>
-
-            <Footer />
         </div>
     );
 };
