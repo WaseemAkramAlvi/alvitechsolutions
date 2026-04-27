@@ -524,7 +524,7 @@ const CVBuilder = () => {
                             </button>
                         </div>
 
-                        <div className="grid lg:grid-cols-2 gap-8 items-start">
+                        <div className="grid lg:grid-cols-2 gap-8 items-start print:block">
                             {/* Editor Side */}
                             <div className={cn(
                                 "space-y-8 no-print",
@@ -894,7 +894,7 @@ const CVBuilder = () => {
 
                             {/* Preview Side */}
                             <div className={cn(
-                                "sticky top-24",
+                                "sticky top-24 print:block print:w-full print:relative print:top-0",
                                 activeTab === 'edit' ? "hidden lg:block" : "block"
                             )}>
                                 <div

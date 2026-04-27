@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { FileText, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import cvSample from '../assets/CV_sample.png';
 
 const CVBuilderPromo = () => {
     return (
@@ -60,7 +61,7 @@ const CVBuilderPromo = () => {
                         >
                             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-4 rounded-3xl shadow-2xl">
                                 <img
-                                    src="https://picsum.photos/seed/resume/800/1000"
+                                    src={cvSample}
                                     alt="CV Builder Preview"
                                     className="rounded-2xl w-full h-auto shadow-lg"
                                     referrerPolicy="no-referrer"
