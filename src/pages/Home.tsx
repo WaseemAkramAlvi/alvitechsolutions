@@ -5,7 +5,6 @@ import Portfolio from '../components/Portfolio';
 import Testimonials from '../components/Testimonials';
 import Pricing from '../components/Pricing';
 import WhyChooseUs from '../components/WhyChooseUs';
-import CVBuilderPromo from '../components/CVBuilderPromo';
 import CTA from '../components/CTA';
 import Contact from '../components/Contact';
 import FAQ from '../components/FAQ';
@@ -19,7 +18,6 @@ const Home = ({ onOpenOrderModal }: HomeProps) => {
     <div className="min-h-screen flex flex-col">
       <Hero onOpenOrderModal={onOpenOrderModal} />
       <Services />
-      <CVBuilderPromo />
       <WhyChooseUs />
       <Portfolio />
       <Testimonials />

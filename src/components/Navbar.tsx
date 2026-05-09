@@ -59,12 +59,15 @@ const Navbar = ({ onOpenOrderModal }: NavbarProps) => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
-          {isHome && navLinks.map((link) => (
+          {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={handleNavLinkClick(link.href.slice(1))}
-              className="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+              className={cn(
+                'text-sm font-medium transition-colors',
+                isHome ? 'text-slate-600 hover:text-primary' : 'text-slate-600 hover:text-primary'
+              )}
             >
               {link.name}
             </a>
@@ -120,11 +123,11 @@ const Navbar = ({ onOpenOrderModal }: NavbarProps) => {
             className="absolute top-full left-0 right-0 bg-white border-t border-slate-100 shadow-xl p-6 md:hidden"
           >
             <div className="flex flex-col gap-4">
-              {isHome && navLinks.map((link) => (
+              {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={handleNavLinkClick(link.href.slice(1))}
+                  onClick={(e) => { handleNavLinkClick(link.href.slice(1))(e as any); setIsMobileMenuOpen(false); }}
                   className="text-lg font-medium text-slate-600 hover:text-primary"
                 >
                   {link.name}

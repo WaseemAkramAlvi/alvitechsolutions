@@ -18,20 +18,11 @@ const serviceOptions = [
   'Other',
 ];
 
-const budgetOptions = [
-  'Under $300',
-  '$300 - $1,000',
-  '$1,000 - $3,000',
-  '$3,000 - $10,000',
-  '$10,000+',
-];
-
 
 
 const OrderModal = ({ isOpen, onClose, defaultService }: OrderModalProps) => {
   const [submitted, setSubmitted] = useState(false);
   const [selectedFileName, setSelectedFileName] = useState('No file selected');
-  const [useBudgetRange, setUseBudgetRange] = useState(true);
 
   const serviceDefault = useMemo(() => {
     if (defaultService && serviceOptions.includes(defaultService)) {
@@ -44,7 +35,6 @@ const OrderModal = ({ isOpen, onClose, defaultService }: OrderModalProps) => {
     if (!isOpen) {
       setSubmitted(false);
       setSelectedFileName('No file selected');
-      setUseBudgetRange(true);
       return;
     }
 
@@ -65,33 +55,57 @@ const OrderModal = ({ isOpen, onClose, defaultService }: OrderModalProps) => {
     };
   }, [isOpen, onClose]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
+    const budget = String(data.budget ?? '').trim();
+    const referenceFile = formData.get('referenceFile');
+    const attachmentFile = referenceFile instanceof File && referenceFile.size > 0 ? referenceFile : null;
+    const attachmentText = selectedFileName !== 'No file selected'
+      ? `🖼️ *Attachment:* ${selectedFileName} (please send this file in WhatsApp chat after it opens)`
+      : '🖼️ *Attachment:* Not provided';
 
     // Build WhatsApp message
     const message = `
-🎯 *New Order Request*
+  🚀 *New Client Order Request*
 
-👤 *Owner Name:* ${data.ownerName}
-🏢 *Business Name:* ${data.businessName}
-📂 *Category:* ${data.businessCategory}
-🎨 *Service:* ${data.serviceRequired}
-💰 *Budget:* ${data.budgetRange || data.customBudget}
+  👤 *Owner Name:* ${data.ownerName}
+  🏢 *Business Name:* ${data.businessName}
+  🏷️ *Business Category:* ${data.businessCategory}
+  🛠️ *Service Required:* ${data.serviceRequired}
+  💸 *Budget:* ${budget || 'Not specified'}
 📅 *Deadline:* ${data.projectDeadline}
 📍 *Location:* ${data.location}
-📝 *Description:* ${data.description}
-${selectedFileName !== 'No file selected' ? `📎 *Reference:* ${selectedFileName}` : ''}
+  📝 *Project Details:* ${data.description}
+  ${attachmentText}
     `.trim();
 
-    // Encode message for WhatsApp
-    const whatsappMessage = encodeURIComponent(message);
-    const whatsappURL = `https://wa.me/923075579807?text=${whatsappMessage}`;
+    let sentViaShareApi = false;
 
-    // Open WhatsApp
-    window.open(whatsappURL, '_blank');
+    // On supported devices/browsers, this allows selecting WhatsApp with the attached file.
+    if (attachmentFile && navigator.share && typeof navigator.canShare === 'function') {
+      try {
+        if (navigator.canShare({ files: [attachmentFile] })) {
+          await navigator.share({
+            title: 'New Client Order Request',
+            text: message,
+            files: [attachmentFile],
+          });
+          sentViaShareApi = true;
+        }
+      } catch {
+        sentViaShareApi = false;
+      }
+    }
+
+    // Fallback: open WhatsApp with formatted message text.
+    if (!sentViaShareApi) {
+      const whatsappMessage = encodeURIComponent(message);
+      const whatsappURL = `https://wa.me/923075579807?text=${whatsappMessage}`;
+      window.open(whatsappURL, '_blank');
+    }
 
     // Show success state
     setSubmitted(true);
@@ -105,7 +119,6 @@ ${selectedFileName !== 'No file selected' ? `📎 *Reference:* ${selectedFileNam
   const handleClose = () => {
     setSubmitted(false);
     setSelectedFileName('No file selected');
-    setUseBudgetRange(true);
     onClose();
   };
 
@@ -201,37 +214,11 @@ ${selectedFileName !== 'No file selected' ? `📎 *Reference:* ${selectedFileNam
 
                     <div className="grid gap-4 sm:grid-cols-2">
                       <SelectField label="Service Required" name="serviceRequired" options={serviceOptions} defaultValue={serviceDefault} required />
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <label className="text-sm font-bold text-slate-700 ml-1">Budget</label>
-                          <button
-                            type="button"
-                            onClick={() => setUseBudgetRange(!useBudgetRange)}
-                            className="text-xs font-bold text-primary hover:underline"
-                          >
-                            {useBudgetRange ? 'Enter Custom Amount' : 'Choose Preset'}
-                          </button>
-                        </div>
-                        {useBudgetRange ? (
-                          <select
-                            name="budgetRange"
-                            defaultValue={budgetOptions[1]}
-                            className={fieldStyles}
-                          >
-                            <option value="">Select a range</option>
-                            {budgetOptions.map((option) => (
-                              <option key={option} value={option}>{option}</option>
-                            ))}
-                          </select>
-                        ) : (
-                          <input
-                            type="text"
-                            name="customBudget"
-                            placeholder="e.g., $5,000 or 500,000 PKR"
-                            className={fieldStyles}
-                          />
-                        )}
-                      </div>
+                      <Field
+                        label="Budget"
+                        name="budget"
+                        placeholder="e.g., $5,000 or 500,000 PKR"
+                      />
                     </div>
 
                     <div className="grid gap-4 sm:grid-cols-2">

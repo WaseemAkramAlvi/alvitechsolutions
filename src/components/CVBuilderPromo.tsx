@@ -1,10 +1,16 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { FileText, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { BriefcaseBusiness, ArrowRight, CheckCircle2 } from 'lucide-react';
 import cvSample from '../assets/CV_sample.png';
 
 const CVBuilderPromo = () => {
+    const handleViewPackages = () => {
+        const pricingSection = document.getElementById('pricing');
+        if (pricingSection) {
+            pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+
     return (
         <section className="py-24 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
@@ -20,22 +26,22 @@ const CVBuilderPromo = () => {
                             viewport={{ once: true }}
                         >
                             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
-                                <FileText size={14} />
-                                Free Tool for Visitors
+                                <BriefcaseBusiness size={14} />
+                                Built for Business Owners
                             </div>
                             <h2 className="text-3xl md:text-5xl font-bold text-white font-display mb-6 leading-tight">
-                                Build Your Professional <span className="text-primary">CV in Minutes</span>
+                                Build a High-Converting <span className="text-primary">Business Presence</span>
                             </h2>
                             <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-                                Stand out from the crowd with our free, professional CV builder. Designed to help you land your dream job with a high-impact resume.
+                                From websites to branding and digital campaigns, we help businesses and client-facing teams launch a premium online presence that wins trust and drives sales.
                             </p>
 
                             <ul className="space-y-4 mb-10">
                                 {[
-                                    'Real-time live preview',
-                                    'Professional ATS-friendly templates',
-                                    'Easy to use editor',
-                                    'Download as PDF instantly'
+                                    'Conversion-focused website design',
+                                    'Brand strategy for client trust',
+                                    'Mobile-first UI for all devices',
+                                    'Fast delivery with clear milestones'
                                 ].map((item) => (
                                     <li key={item} className="flex items-center gap-3 text-slate-300">
                                         <CheckCircle2 size={20} className="text-primary" />
@@ -44,13 +50,14 @@ const CVBuilderPromo = () => {
                                 ))}
                             </ul>
 
-                            <Link
-                                to="/cv-builder"
+                            <button
+                                type="button"
+                                onClick={handleViewPackages}
                                 className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-primary-dark transition-all shadow-xl shadow-primary/20 active:scale-95"
                             >
-                                Start Building for Free
+                                View Business Packages
                                 <ArrowRight size={20} />
-                            </Link>
+                            </button>
                         </motion.div>
 
                         <motion.div
@@ -62,7 +69,7 @@ const CVBuilderPromo = () => {
                             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-4 rounded-3xl shadow-2xl">
                                 <img
                                     src={cvSample}
-                                    alt="CV Builder Preview"
+                                    alt="Business project preview"
                                     className="rounded-2xl w-full h-auto shadow-lg"
                                     referrerPolicy="no-referrer"
                                 />
@@ -74,8 +81,8 @@ const CVBuilderPromo = () => {
                                         <CheckCircle2 size={24} />
                                     </div>
                                     <div>
-                                        <div className="text-slate-900 font-bold">100% Free</div>
-                                        <div className="text-slate-500 text-sm">No registration required</div>
+                                        <div className="text-slate-900 font-bold">Client Ready</div>
+                                        <div className="text-slate-500 text-sm">Designed for growth-focused businesses</div>
                                     </div>
                                 </div>
                             </div>
