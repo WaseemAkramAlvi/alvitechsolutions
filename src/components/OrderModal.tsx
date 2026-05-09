@@ -57,7 +57,7 @@ const OrderModal = ({ isOpen, onClose, defaultService }: OrderModalProps) => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
     const budget = String(data.budget ?? '').trim();
@@ -69,42 +69,46 @@ const OrderModal = ({ isOpen, onClose, defaultService }: OrderModalProps) => {
 
     // Build WhatsApp message
     const message = `
-  🚀 *New Client Order Request*
-
-  👤 *Owner Name:* ${data.ownerName}
-  🏢 *Business Name:* ${data.businessName}
-  🏷️ *Business Category:* ${data.businessCategory}
-  🛠️ *Service Required:* ${data.serviceRequired}
-  💸 *Budget:* ${budget || 'Not specified'}
+🚀 *New Client Order Request*
+ 
+👤 *Owner Name:* ${data.ownerName}
+🏢 *Business Name:* ${data.businessName}
+🏷️ *Business Category:* ${data.businessCategory}
+🛠️ *Service Required:* ${data.serviceRequired}
+💸 *Budget:* ${budget || 'Not specified'}
 📅 *Deadline:* ${data.projectDeadline}
 📍 *Location:* ${data.location}
-  📝 *Project Details:* ${data.description}
-  ${attachmentText}
+📝 *Project Details:* ${data.description}
+${attachmentText}
     `.trim();
 
-    let sentViaShareApi = false;
+    const whatsappMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/923075579807?text=${whatsappMessage}`;
 
-    // On supported devices/browsers, this allows selecting WhatsApp with the attached file.
-    if (attachmentFile && navigator.share && typeof navigator.canShare === 'function') {
-      try {
-        if (navigator.canShare({ files: [attachmentFile] })) {
-          await navigator.share({
-            title: 'New Client Order Request',
-            text: message,
-            files: [attachmentFile],
-          });
-          sentViaShareApi = true;
+    // Try Web Share API for attached file when available (best-effort). Regardless, open WhatsApp URL.
+    try {
+      if (attachmentFile && navigator.share && typeof (navigator as any).canShare === 'function') {
+        try {
+          if ((navigator as any).canShare({ files: [attachmentFile] })) {
+            await navigator.share({
+              title: 'New Client Order Request',
+              text: message,
+              files: [attachmentFile],
+            });
+          }
+        } catch (e) {
+          // ignore share errors and continue to open WhatsApp link
         }
-      } catch {
-        sentViaShareApi = false;
       }
+    } catch {
+      // ignore and fallback
     }
 
-    // Fallback: open WhatsApp with formatted message text.
-    if (!sentViaShareApi) {
-      const whatsappMessage = encodeURIComponent(message);
-      const whatsappURL = `https://wa.me/923075579807?text=${whatsappMessage}`;
+    // Always open WhatsApp chat with the formatted message (ensures WhatsApp opens on submit)
+    try {
       window.open(whatsappURL, '_blank');
+    } catch {
+      // ignore popup blockers; user can copy the message manually if needed
     }
 
     // Show success state
