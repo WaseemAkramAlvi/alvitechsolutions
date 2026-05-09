@@ -53,7 +53,11 @@ const plans = [
   },
 ];
 
-const Pricing = () => {
+type PricingProps = {
+  onOpenOrderModal: (service?: string) => void;
+};
+
+const Pricing = ({ onOpenOrderModal }: PricingProps) => {
   return (
     <section id="pricing" className="py-16 md:py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6">
@@ -118,8 +122,16 @@ const Pricing = () => {
                 plan.popular
                   ? "bg-primary text-white hover:bg-primary-dark shadow-lg shadow-primary/20"
                   : "bg-slate-100 text-slate-900 hover:bg-slate-200"
-              )}>
-                {plan.cta}
+              )}
+                onClick={() => onOpenOrderModal(
+                  plan.name === 'Starter'
+                    ? 'Website Design'
+                    : plan.name === 'Business'
+                      ? 'Branding'
+                      : 'Other'
+                )}
+              >
+                Order Now
                 <ArrowRight size={18} />
               </button>
             </motion.div>

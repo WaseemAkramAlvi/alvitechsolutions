@@ -13,7 +13,15 @@ const WhatsAppIcon = ({ size = 24 }: { size?: number }) => (
   </svg>
 );
 
-const CTA = () => {
+type CTAProps = {
+  onOpenOrderModal: (service?: string) => void;
+};
+
+const CTA = ({ onOpenOrderModal }: CTAProps) => {
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="py-12 md:py-24 px-6">
       <motion.div
@@ -28,29 +36,26 @@ const CTA = () => {
 
         <div className="relative z-10 max-w-3xl mx-auto">
           <h2 className="font-display text-3xl md:text-6xl font-bold mb-6 md:mb-8 leading-tight">
-            Ready to Automate Your Business?
+            Ready to Launch Your Next Project?
           </h2>
           <p className="text-lg md:text-xl text-white/80 mb-8 md:mb-10 leading-relaxed">
-            Stop wasting time on manual processes. Let's build a custom solution that scales with your ambition.
+            Tell us what you need and we’ll shape a premium digital solution that fits your goals, timeline, and budget.
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a
-              href="#contact"
+            <button
+              onClick={() => onOpenOrderModal('Website Design')}
               className="bg-white text-primary px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:bg-slate-50 transition-all hover:shadow-xl active:scale-95 flex items-center justify-center gap-2"
             >
-              Get Free Consultation
+              Order Now
               <ArrowRight size={22} />
-            </a>
-            <a
-              href="https://wa.me/923075579807"
-              target="_blank"
-              rel="noopener noreferrer"
+            </button>
+            <button
+              onClick={() => scrollToSection('services')}
               className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:bg-white/20 transition-all active:scale-95 flex items-center justify-center gap-2"
             >
-              <WhatsAppIcon size={22} />
-              Chat on WhatsApp
-            </a>
+              Learn More
+            </button>
           </div>
         </div>
       </motion.div>

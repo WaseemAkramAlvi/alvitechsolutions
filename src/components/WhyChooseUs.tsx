@@ -9,6 +9,29 @@ const stats = [
   { label: 'Development Speed', value: 40, suffix: '% Faster', icon: Zap },
 ];
 
+const AnimatedNumber = ({ target }: { target: number }) => {
+  const [value, setValue] = React.useState(0);
+
+  React.useEffect(() => {
+    let frame = 0;
+    const duration = 1200;
+    const start = performance.now();
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      setValue(Math.round(target * progress));
+      if (progress < 1) {
+        frame = requestAnimationFrame(tick);
+      }
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [target]);
+
+  return <>{value}</>;
+};
+
 const WhyChooseUs = () => {
   return (
     <section id="why-us" className="py-16 md:py-24 bg-white">
@@ -53,7 +76,7 @@ const WhyChooseUs = () => {
                   <stat.icon size={20} className="md:w-6 md:h-6" />
                 </div>
                 <div className="text-2xl md:text-3xl font-bold text-slate-900 mb-1">
-                  {stat.value}{stat.suffix}
+                  <AnimatedNumber target={stat.value} />{stat.suffix}
                 </div>
                 <div className="text-xs md:text-sm text-slate-500 font-medium">{stat.label}</div>
               </motion.div>

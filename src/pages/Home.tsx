@@ -8,20 +8,25 @@ import WhyChooseUs from '../components/WhyChooseUs';
 import CVBuilderPromo from '../components/CVBuilderPromo';
 import CTA from '../components/CTA';
 import Contact from '../components/Contact';
-const Home = () => {
+import FAQ from '../components/FAQ';
+
+type HomeProps = {
+  onOpenOrderModal: (service?: string) => void;
+};
+
+const Home = ({ onOpenOrderModal }: HomeProps) => {
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-grow">
-        <Hero />
-        <Services />
-        <CVBuilderPromo />
-        <WhyChooseUs />
-        <Portfolio />
-        <Testimonials />
-        <Pricing />
-        <CTA />
-        <Contact />
-      </main>
+      <Hero onOpenOrderModal={onOpenOrderModal} />
+      <Services />
+      <CVBuilderPromo />
+      <WhyChooseUs />
+      <Portfolio />
+      <Testimonials />
+      <Pricing onOpenOrderModal={onOpenOrderModal} />
+      <FAQ />
+      <CTA onOpenOrderModal={onOpenOrderModal} />
+      <Contact />
     </div>
   );
 };

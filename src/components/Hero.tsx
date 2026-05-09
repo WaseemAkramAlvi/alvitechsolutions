@@ -1,9 +1,16 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Play, CheckCircle2, FileText } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 
-const Hero = () => {
+type HeroProps = {
+  onOpenOrderModal: (service?: string) => void;
+};
+
+const Hero = ({ onOpenOrderModal }: HeroProps) => {
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="relative pt-24 md:pt-32 pb-12 md:pb-20 overflow-hidden">
       {/* Background Elements */}
@@ -19,37 +26,34 @@ const Hero = () => {
           transition={{ duration: 0.6 }}
           className="text-center lg:text-left"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] md:text-xs font-bold uppercase tracking-wider mb-6">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-            </span>
-            Next-Gen Web Solutions
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 text-secondary text-[10px] md:text-xs font-bold uppercase tracking-wider mb-6 shadow-lg shadow-slate-200/50 border border-white/70">
+            <Sparkles size={14} />
+            Premium Digital Services
           </div>
 
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
-            Create Your Professional CV — Free & Fast
+            Transform Your Business with Modern Digital Solutions
           </h1>
 
           <p className="text-lg text-slate-700 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-            Build a polished CV in minutes using ready-made templates and instant downloads. No signup — completely free.
+            We create modern websites, branding, and digital experiences that help businesses grow faster, look premium, and convert more customers.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
-            <Link
-              to="/cv-builder"
-              className="w-full sm:w-auto bg-gradient-to-r from-secondary to-primary text-white px-10 py-4 rounded-full font-extrabold flex items-center justify-center gap-3 hover:opacity-95 transition-all hover:shadow-2xl shadow-primary/20 group"
-              aria-label="Create your CV"
+            <button
+              onClick={() => onOpenOrderModal('Website Design')}
+              className="w-full sm:w-auto bg-gradient-to-r from-primary to-secondary text-white px-10 py-4 rounded-full font-extrabold flex items-center justify-center gap-3 hover:opacity-95 transition-all hover:shadow-2xl shadow-primary/20 group"
             >
-              <FileText size={18} />
-              Create Your CV — It's Free
+              Order Now
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </button>
 
-            <div className="text-sm text-slate-600 max-w-xs">
-              <div className="font-semibold">Instant templates · Download PDF · ATS-friendly</div>
-              <div className="mt-1">Start with a template and customize in seconds.</div>
-            </div>
+            <button
+              onClick={() => scrollToSection('services')}
+              className="w-full sm:w-auto bg-white text-slate-900 px-10 py-4 rounded-full font-extrabold flex items-center justify-center gap-3 border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all"
+            >
+              Learn More
+            </button>
           </div>
 
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-6">
@@ -59,11 +63,11 @@ const Hero = () => {
             </div>
             <div className="flex items-center gap-2 text-xs md:text-sm font-medium text-slate-500">
               <CheckCircle2 size={16} className="text-emerald-500" />
-              24/7 Support
+              Conversion Focused
             </div>
             <div className="flex items-center gap-2 text-xs md:text-sm font-medium text-slate-500">
               <CheckCircle2 size={16} className="text-emerald-500" />
-              Scalable Tech
+              Mobile First
             </div>
           </div>
         </motion.div>
@@ -112,7 +116,7 @@ const Hero = () => {
                     <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
                       <path d="M1 7L3.5 2.5L5.5 5L7 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    Grow Your Business
+                    Growth Dashboard
                   </div>
 
                   {/* Bars - strictly upward */}

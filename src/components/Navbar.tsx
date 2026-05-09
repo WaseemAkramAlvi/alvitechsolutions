@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Rocket, FileText, Sparkles } from 'lucide-react';
+import { Menu, X, FileText, Sparkles } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/Logo.svg';
 
-const Navbar = () => {
+type NavbarProps = {
+  onOpenOrderModal: (service?: string) => void;
+};
+
+const Navbar = ({ onOpenOrderModal }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -23,10 +27,6 @@ const Navbar = () => {
       }, 300);
     }
     setIsMobileMenuOpen(false);
-  };
-
-  const handleContactClick = () => {
-    handleNavLinkClick('contact')({} as React.MouseEvent<HTMLAnchorElement>);
   };
 
   useEffect(() => {
@@ -81,11 +81,23 @@ const Navbar = () => {
             <Sparkles size={16} className={location.pathname.startsWith('/ai-tools') || location.pathname === '/cv-builder' ? "animate-pulse" : ""} />
             Free AI Tools
           </Link>
+          <Link
+            to="/cv-builder"
+            className={cn(
+              "flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full transition-all active:scale-95",
+              location.pathname === '/cv-builder'
+                ? "bg-secondary text-white shadow-lg shadow-secondary/25"
+                : "bg-secondary/10 text-secondary hover:bg-secondary hover:text-white hover:shadow-lg hover:shadow-secondary/25"
+            )}
+          >
+            <FileText size={16} className={location.pathname === '/cv-builder' ? "animate-pulse" : ""} />
+            CV Making
+          </Link>
           <button
-            onClick={handleContactClick}
+            onClick={() => onOpenOrderModal('Website Design')}
             className="bg-slate-900 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-slate-800 transition-all hover:shadow-lg active:scale-95"
           >
-            Get Consultation
+            Order Now
           </button>
         </div>
 
@@ -126,11 +138,19 @@ const Navbar = () => {
                 <Sparkles size={20} />
                 Free AI Tools
               </Link>
+              <Link
+                to="/cv-builder"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 text-lg font-bold text-secondary bg-secondary/10 hover:bg-secondary hover:text-white transition-colors py-3 rounded-xl border border-secondary/20 hover:border-secondary shadow-sm"
+              >
+                <FileText size={20} />
+                CV Making
+              </Link>
               <button
-                onClick={handleContactClick}
+                onClick={() => onOpenOrderModal('Website Design')}
                 className="bg-primary text-white px-6 py-3 rounded-xl text-center font-bold w-full"
               >
-                Get Started
+                Order Now
               </button>
             </div>
           </motion.div>

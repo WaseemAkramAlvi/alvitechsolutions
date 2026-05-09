@@ -5,9 +5,9 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Space Grotesk", sans-serif;
   
-  --color-primary: #0ea5e9;
-  --color-primary-dark: #0284c7;
-  --color-secondary: #6366f1;
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-secondary: #7c3aed;
 }
 
 @layer base {
@@ -17,6 +17,10 @@
   
   body {
     @apply bg-slate-50 text-slate-900 antialiased;
+    background-image:
+      radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 30%),
+      radial-gradient(circle at top right, rgba(124, 58, 237, 0.08), transparent 28%),
+      linear-gradient(to bottom, #f8fafc, #ffffff 55%, #f8fafc);
   }
 }
 
