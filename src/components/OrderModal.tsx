@@ -55,14 +55,12 @@ const OrderModal = ({ isOpen, onClose, defaultService }: OrderModalProps) => {
     };
   }, [isOpen, onClose]);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
     const budget = String(data.budget ?? '').trim();
-    const referenceFile = formData.get('referenceFile');
-    const attachmentFile = referenceFile instanceof File && referenceFile.size > 0 ? referenceFile : null;
     const attachmentText = selectedFileName !== 'No file selected'
       ? `🖼️ *Attachment:* ${selectedFileName} (please send this file in WhatsApp chat after it opens)`
       : '🖼️ *Attachment:* Not provided';
@@ -82,34 +80,10 @@ const OrderModal = ({ isOpen, onClose, defaultService }: OrderModalProps) => {
 ${attachmentText}
     `.trim();
 
+    // Open WhatsApp directly with the formatted message
     const whatsappMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/923075579807?text=${whatsappMessage}`;
-
-    // Try Web Share API for attached file when available (best-effort). Regardless, open WhatsApp URL.
-    try {
-      if (attachmentFile && navigator.share && typeof (navigator as any).canShare === 'function') {
-        try {
-          if ((navigator as any).canShare({ files: [attachmentFile] })) {
-            await navigator.share({
-              title: 'New Client Order Request',
-              text: message,
-              files: [attachmentFile],
-            });
-          }
-        } catch (e) {
-          // ignore share errors and continue to open WhatsApp link
-        }
-      }
-    } catch {
-      // ignore and fallback
-    }
-
-    // Always open WhatsApp chat with the formatted message (ensures WhatsApp opens on submit)
-    try {
-      window.open(whatsappURL, '_blank');
-    } catch {
-      // ignore popup blockers; user can copy the message manually if needed
-    }
+    window.open(whatsappURL, '_blank');
 
     // Show success state
     setSubmitted(true);
