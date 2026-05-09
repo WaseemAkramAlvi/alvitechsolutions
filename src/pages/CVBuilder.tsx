@@ -295,24 +295,24 @@ const CVBuilder = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 pt-24 pb-12 px-6">
+        <div className="min-h-screen bg-slate-50 pt-20 md:pt-24 pb-8 md:pb-12 px-4 md:px-6">
             <div className="max-w-7xl mx-auto">
                 {view === 'selection' ? (
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="space-y-12"
+                        className="space-y-6 md:space-y-12"
                     >
                         {/* Selection Header */}
-                        <div className="text-center max-w-3xl mx-auto">
-                            <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-primary transition-colors mb-6">
+                        <div className="text-center max-w-3xl mx-auto px-2">
+                            <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-primary transition-colors mb-4 md:mb-6">
                                 <ChevronLeft size={18} />
-                                <span className="text-sm font-medium">Back to Home</span>
+                                <span className="text-xs md:text-sm font-medium">Back to Home</span>
                             </Link>
-                            <h1 className="text-4xl md:text-7xl font-bold font-display text-slate-900 mb-6 tracking-tight">
+                            <h1 className="text-2xl md:text-5xl lg:text-7xl font-bold font-display text-slate-900 mb-3 md:mb-6 tracking-tight leading-tight">
                                 Pick Your <span className="text-primary">Perfect Style</span>
                             </h1>
-                            <p className="text-slate-600 text-lg md:text-xl leading-relaxed">
+                            <p className="text-slate-600 text-sm md:text-lg lg:text-xl leading-relaxed">
                                 Choose from 20+ professionally crafted templates designed to pass ATS filters and impress hiring managers.
                             </p>
                         </div>
@@ -348,14 +348,14 @@ const CVBuilder = () => {
                         </div>
 
                         {/* Template Grid */}
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
                             {filteredTemplates.map((template, index) => (
                                 <motion.div
                                     key={template.id}
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: index * 0.05 }}
-                                    className="group relative bg-white rounded-[2.5rem] border border-slate-200 overflow-hidden hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all cursor-pointer flex flex-col"
+                                    className="group relative bg-white rounded-2xl md:rounded-[2.5rem] border border-slate-200 overflow-hidden hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all cursor-pointer flex flex-col"
                                     onClick={() => handleSelectTemplate(template.id)}
                                 >
                                     {/* Template Preview Mockup */}
@@ -457,41 +457,42 @@ const CVBuilder = () => {
                 ) : (
                     <>
                         {/* Editor View */}
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12 no-print">
-                            <div>
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6 mb-8 md:mb-12 no-print">
+                            <div className="w-full">
                                 <button
                                     onClick={() => setView('selection')}
-                                    className="flex items-center gap-2 text-slate-500 hover:text-primary transition-colors mb-4"
+                                    className="flex items-center gap-2 text-slate-500 hover:text-primary transition-colors mb-3 md:mb-4 text-sm"
                                 >
                                     <ChevronLeft size={18} />
-                                    <span className="text-sm font-medium">Change Template</span>
+                                    <span className="font-medium">Change Template</span>
                                 </button>
-                                <h1 className="text-3xl md:text-5xl font-bold font-display text-slate-900">
+                                <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold font-display text-slate-900 break-words">
                                     Editing <span className="text-primary">{selectedTemplate.name}</span>
                                 </h1>
-                                <p className="text-slate-600 mt-2">Tailored for {selectedTemplate.profession} professionals.</p>
+                                <p className="text-sm md:text-base text-slate-600 mt-2">Tailored for {selectedTemplate.profession} professionals.</p>
                             </div>
 
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-3 w-full md:w-auto">
                                 <button
                                     onClick={handlePrint}
-                                    className="bg-primary text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-primary-dark transition-all shadow-lg shadow-primary/20"
+                                    className="w-full md:w-auto bg-primary text-white px-4 md:px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 text-sm"
                                 >
                                     <Printer size={18} />
-                                    Print / Save PDF
+                                    <span className="hidden md:inline">Print / Save PDF</span>
+                                    <span className="md:hidden">Print PDF</span>
                                 </button>
                             </div>
                         </div>
 
                         {/* Template Quick Switcher (Mini) */}
-                        <div className="mb-8 no-print overflow-x-auto pb-2 scrollbar-hide">
+                        <div className="mb-6 md:mb-8 no-print overflow-x-auto pb-2 scrollbar-hide">
                             <div className="flex gap-2">
                                 {CV_TEMPLATES.map((t) => (
                                     <button
                                         key={t.id}
                                         onClick={() => setSelectedTemplateId(t.id)}
                                         className={cn(
-                                            "flex-shrink-0 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all border",
+                                            "flex-shrink-0 px-3 md:px-4 py-1.5 md:py-2 rounded-full text-[8px] md:text-[10px] font-bold uppercase tracking-wider transition-all border",
                                             selectedTemplateId === t.id
                                                 ? "bg-primary text-white border-primary shadow-md"
                                                 : "bg-white text-slate-500 border-slate-200 hover:border-primary/30"
@@ -503,11 +504,11 @@ const CVBuilder = () => {
                             </div>
                         </div>
 
-                        <div className="flex md:hidden bg-white rounded-xl p-1 mb-6 border border-slate-200 no-print">
+                        <div className="md:hidden bg-white rounded-lg p-0.5 mb-6 border border-slate-200 no-print">
                             <button
                                 onClick={() => setActiveTab('edit')}
                                 className={cn(
-                                    "flex-1 py-2 rounded-lg text-sm font-bold transition-all",
+                                    "flex-1 py-2 rounded-md text-xs md:text-sm font-bold transition-all",
                                     activeTab === 'edit' ? "bg-primary text-white" : "text-slate-600"
                                 )}
                             >
@@ -516,7 +517,7 @@ const CVBuilder = () => {
                             <button
                                 onClick={() => setActiveTab('preview')}
                                 className={cn(
-                                    "flex-1 py-2 rounded-lg text-sm font-bold transition-all",
+                                    "flex-1 py-2 rounded-md text-xs md:text-sm font-bold transition-all",
                                     activeTab === 'preview' ? "bg-primary text-white" : "text-slate-600"
                                 )}
                             >
@@ -524,56 +525,56 @@ const CVBuilder = () => {
                             </button>
                         </div>
 
-                        <div className="grid lg:grid-cols-2 gap-8 items-start print:block">
+                        <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start print:block">
                             {/* Editor Side */}
                             <div className={cn(
-                                "space-y-8 no-print",
+                                "space-y-6 md:space-y-8 no-print",
                                 activeTab === 'preview' ? "hidden lg:block" : "block"
                             )}>
                                 {/* Personal Info */}
-                                <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                                <div className="bg-white p-4 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl border border-slate-200 shadow-sm">
                                     <div className="flex items-center gap-3 mb-6">
                                         <div className="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
                                             <User size={20} />
                                         </div>
-                                        <h2 className="text-xl font-bold text-slate-900">Personal Information</h2>
+                                        <h2 className="text-lg md:text-xl font-bold text-slate-900">Personal Information</h2>
                                     </div>
 
-                                    <div className="grid md:grid-cols-2 gap-4">
+                                    <div className="grid sm:grid-cols-2 gap-3 md:gap-4">
                                         <div className="space-y-2">
-                                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Full Name</label>
+                                            <label className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider">Full Name</label>
                                             <input
                                                 type="text"
                                                 value={data.name}
                                                 onChange={(e) => setData({ ...data, name: e.target.value })}
-                                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary transition-colors"
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg md:rounded-xl px-3 md:px-4 py-2 md:py-3 text-xs md:text-sm outline-none focus:border-primary transition-colors"
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Email Address</label>
+                                            <label className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider">Email Address</label>
                                             <input
                                                 type="email"
                                                 value={data.email}
                                                 onChange={(e) => setData({ ...data, email: e.target.value })}
-                                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary transition-colors"
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg md:rounded-xl px-3 md:px-4 py-2 md:py-3 text-xs md:text-sm outline-none focus:border-primary transition-colors"
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Phone Number</label>
+                                            <label className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider">Phone Number</label>
                                             <input
                                                 type="text"
                                                 value={data.phone}
                                                 onChange={(e) => setData({ ...data, phone: e.target.value })}
-                                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary transition-colors"
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg md:rounded-xl px-3 md:px-4 py-2 md:py-3 text-xs md:text-sm outline-none focus:border-primary transition-colors"
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Address</label>
+                                            <label className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider">Address</label>
                                             <input
                                                 type="text"
                                                 value={data.address}
                                                 onChange={(e) => setData({ ...data, address: e.target.value })}
-                                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary transition-colors"
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg md:rounded-xl px-3 md:px-4 py-2 md:py-3 text-xs md:text-sm outline-none focus:border-primary transition-colors"
                                             />
                                         </div>
                                     </div>
@@ -599,23 +600,23 @@ const CVBuilder = () => {
                                 </div>
 
                                 {/* Experience */}
-                                <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                                <div className="bg-white p-4 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl border border-slate-200 shadow-sm">
                                     <div className="flex items-center justify-between mb-6">
                                         <div className="flex items-center gap-3">
                                             <div className="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
                                                 <Briefcase size={20} />
                                             </div>
-                                            <h2 className="text-xl font-bold text-slate-900">Experience</h2>
+                                            <h2 className="text-lg md:text-xl font-bold text-slate-900">Experience</h2>
                                         </div>
                                         <button
                                             onClick={addExperience}
-                                            className="text-primary hover:bg-primary/5 p-2 rounded-lg transition-colors"
+                                            className="text-primary hover:bg-primary/5 p-1.5 md:p-2 rounded-lg transition-colors flex-shrink-0"
                                         >
                                             <Plus size={24} />
                                         </button>
                                     </div>
 
-                                    <div className="space-y-6">
+                                    <div className="space-y-4 md:space-y-6">
                                         {data.experiences.map((exp) => (
                                             <div key={exp.id} className="p-4 bg-slate-50 rounded-2xl border border-slate-200 relative group">
                                                 <button
@@ -668,23 +669,23 @@ const CVBuilder = () => {
                                 </div>
 
                                 {/* Education */}
-                                <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                                <div className="bg-white p-4 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl border border-slate-200 shadow-sm">
                                     <div className="flex items-center justify-between mb-6">
                                         <div className="flex items-center gap-3">
                                             <div className="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
                                                 <GraduationCap size={20} />
                                             </div>
-                                            <h2 className="text-xl font-bold text-slate-900">Education</h2>
+                                            <h2 className="text-lg md:text-xl font-bold text-slate-900">Education</h2>
                                         </div>
                                         <button
                                             onClick={addEducation}
-                                            className="text-primary hover:bg-primary/5 p-2 rounded-lg transition-colors"
+                                            className="text-primary hover:bg-primary/5 p-1.5 md:p-2 rounded-lg transition-colors flex-shrink-0"
                                         >
                                             <Plus size={24} />
                                         </button>
                                     </div>
 
-                                    <div className="space-y-6">
+                                    <div className="space-y-4 md:space-y-6">
                                         {data.educations.map((edu) => (
                                             <div key={edu.id} className="p-4 bg-slate-50 rounded-2xl border border-slate-200 relative group">
                                                 <button
@@ -719,33 +720,33 @@ const CVBuilder = () => {
                                 </div>
 
                                 {/* Skills */}
-                                <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                                <div className="bg-white p-4 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl border border-slate-200 shadow-sm">
                                     <div className="flex items-center gap-3 mb-6">
                                         <div className="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
                                             <Wrench size={20} />
                                         </div>
-                                        <h2 className="text-xl font-bold text-slate-900">Skills</h2>
+                                        <h2 className="text-lg md:text-xl font-bold text-slate-900">Skills</h2>
                                     </div>
 
-                                    <div className="flex flex-wrap gap-2 mb-4">
+                                    <div className="flex flex-wrap gap-2 mb-3 md:mb-4">
                                         {data.skills.map((skill) => (
                                             <span
                                                 key={skill}
-                                                className="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-2"
+                                                className="bg-slate-100 text-slate-700 px-2.5 md:px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5"
                                             >
                                                 {skill}
-                                                <button onClick={() => removeSkill(skill)} className="hover:text-red-500">
+                                                <button onClick={() => removeSkill(skill)} className="hover:text-red-500 flex-shrink-0">
                                                     <Trash2 size={12} />
                                                 </button>
                                             </span>
                                         ))}
                                     </div>
 
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-2 flex-col sm:flex-row">
                                         <input
                                             id="skill-input"
                                             placeholder="Add a skill (e.g. React)"
-                                            className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm outline-none focus:border-primary"
+                                            className="flex-1 bg-slate-50 border border-slate-200 rounded-lg md:rounded-xl px-3 md:px-4 py-2 text-xs md:text-sm outline-none focus:border-primary"
                                             onKeyDown={(e) => {
                                                 if (e.key === 'Enter') {
                                                     addSkill(e.currentTarget.value);
@@ -759,7 +760,7 @@ const CVBuilder = () => {
                                                 addSkill(input.value);
                                                 input.value = '';
                                             }}
-                                            className="bg-primary text-white px-4 py-2 rounded-xl font-bold text-sm"
+                                            className="bg-primary text-white px-4 py-2 rounded-lg md:rounded-xl font-bold text-xs md:text-sm w-full sm:w-auto"
                                         >
                                             Add
                                         </button>
@@ -767,40 +768,40 @@ const CVBuilder = () => {
                                 </div>
 
                                 {/* Social Links */}
-                                <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                                <div className="bg-white p-4 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl border border-slate-200 shadow-sm">
                                     <div className="flex items-center justify-between mb-6">
                                         <div className="flex items-center gap-3">
                                             <div className="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
                                                 <Globe size={20} />
                                             </div>
-                                            <h2 className="text-xl font-bold text-slate-900">Social Links</h2>
+                                            <h2 className="text-lg md:text-xl font-bold text-slate-900">Social Links</h2>
                                         </div>
                                         <button
                                             onClick={addSocialLink}
-                                            className="text-primary hover:bg-primary/5 p-2 rounded-lg transition-colors"
+                                            className="text-primary hover:bg-primary/5 p-1.5 md:p-2 rounded-lg transition-colors flex-shrink-0"
                                         >
                                             <Plus size={24} />
                                         </button>
                                     </div>
 
-                                    <div className="space-y-4">
+                                    <div className="space-y-3 md:space-y-4">
                                         {data.socialLinks.map((link) => (
-                                            <div key={link.id} className="flex gap-3 items-center group">
+                                            <div key={link.id} className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-start sm:items-center group">
                                                 <input
                                                     placeholder="Platform (e.g. LinkedIn)"
                                                     value={link.platform}
                                                     onChange={(e) => updateSocialLink(link.id, 'platform', e.target.value)}
-                                                    className="w-1/3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm outline-none focus:border-primary"
+                                                    className="w-full sm:w-1/3 bg-slate-50 border border-slate-200 rounded-lg md:rounded-xl px-3 md:px-4 py-2 text-xs md:text-sm outline-none focus:border-primary"
                                                 />
                                                 <input
                                                     placeholder="URL / Username"
                                                     value={link.url}
                                                     onChange={(e) => updateSocialLink(link.id, 'url', e.target.value)}
-                                                    className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm outline-none focus:border-primary"
+                                                    className="flex-1 bg-slate-50 border border-slate-200 rounded-lg md:rounded-xl px-3 md:px-4 py-2 text-xs md:text-sm outline-none focus:border-primary"
                                                 />
                                                 <button
                                                     onClick={() => removeSocialLink(link.id)}
-                                                    className="text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
+                                                    className="text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all flex-shrink-0"
                                                 >
                                                     <Trash2 size={18} />
                                                 </button>
@@ -810,23 +811,23 @@ const CVBuilder = () => {
                                 </div>
 
                                 {/* Custom Sections */}
-                                <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                                <div className="bg-white p-4 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl border border-slate-200 shadow-sm">
                                     <div className="flex items-center justify-between mb-6">
                                         <div className="flex items-center gap-3">
                                             <div className="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
                                                 <Layout size={20} />
                                             </div>
-                                            <h2 className="text-xl font-bold text-slate-900">Custom Sections</h2>
+                                            <h2 className="text-lg md:text-xl font-bold text-slate-900">Custom Sections</h2>
                                         </div>
                                         <button
                                             onClick={addCustomSection}
-                                            className="text-primary hover:bg-primary/5 p-2 rounded-lg transition-colors"
+                                            className="text-primary hover:bg-primary/5 p-1.5 md:p-2 rounded-lg transition-colors flex-shrink-0"
                                         >
                                             <Plus size={24} />
                                         </button>
                                     </div>
 
-                                    <div className="space-y-8">
+                                    <div className="space-y-6 md:space-y-8">
                                         {data.customSections.map((sec) => (
                                             <div key={sec.id} className="p-6 bg-slate-50 rounded-2xl border border-slate-200 relative group">
                                                 <button
@@ -894,7 +895,7 @@ const CVBuilder = () => {
 
                             {/* Preview Side */}
                             <div className={cn(
-                                "sticky top-24 print:block print:w-full print:relative print:top-0",
+                                "sticky top-20 md:top-24 print:block print:w-full print:relative print:top-0",
                                 activeTab === 'edit' ? "hidden lg:block" : "block"
                             )}>
                                 <div
