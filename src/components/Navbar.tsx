@@ -12,16 +12,21 @@ const Navbar = () => {
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
 
-  const handleContactClick = () => {
+  const handleNavLinkClick = (sectionId: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     if (isHome) {
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     } else {
       navigate('/');
       setTimeout(() => {
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
       }, 300);
     }
     setIsMobileMenuOpen(false);
+  };
+
+  const handleContactClick = () => {
+    handleNavLinkClick('contact')({} as React.MouseEvent<HTMLAnchorElement>);
   };
 
   useEffect(() => {
@@ -58,6 +63,7 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
+              onClick={handleNavLinkClick(link.href.slice(1))}
               className="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
             >
               {link.name}
@@ -106,7 +112,7 @@ const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={handleNavLinkClick(link.href.slice(1))}
                   className="text-lg font-medium text-slate-600 hover:text-primary"
                 >
                   {link.name}

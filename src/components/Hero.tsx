@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Play, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Play, CheckCircle2, FileText } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -26,29 +27,29 @@ const Hero = () => {
             Next-Gen Web Solutions
           </div>
 
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6">
-            Transform Your Business with <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Custom Web Apps</span>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
+            Create Your Professional CV — Free & Fast
           </h1>
 
-          <p className="text-base md:text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-            We build powerful web systems, <strong>AI-driven applications</strong>, and <strong>IoT solutions</strong>. We also provide professional <strong>Graphics Design</strong>, <strong>Video Editing</strong>, <strong>Digital Marketing</strong>, and <strong>Office Work</strong> solutions to help your business excel.
+          <p className="text-lg text-slate-700 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+            Build a polished CV in minutes using ready-made templates and instant downloads. No signup — completely free.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
-            <a
-              href="#contact"
-              className="w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-primary-dark transition-all hover:shadow-xl hover:shadow-primary/20 group"
+            <Link
+              to="/cv-builder"
+              className="w-full sm:w-auto bg-gradient-to-r from-secondary to-primary text-white px-10 py-4 rounded-full font-extrabold flex items-center justify-center gap-3 hover:opacity-95 transition-all hover:shadow-2xl shadow-primary/20 group"
+              aria-label="Create your CV"
             >
-              Get Free Consultation
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
-              href="#portfolio"
-              className="w-full sm:w-auto bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-slate-50 transition-all"
-            >
-              <Play size={20} fill="currentColor" />
-              View Our Work
-            </a>
+              <FileText size={18} />
+              Create Your CV — It's Free
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+
+            <div className="text-sm text-slate-600 max-w-xs">
+              <div className="font-semibold">Instant templates · Download PDF · ATS-friendly</div>
+              <div className="mt-1">Start with a template and customize in seconds.</div>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-6">
