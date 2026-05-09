@@ -144,11 +144,11 @@ const OrderModal = ({ isOpen, onClose, defaultService }: OrderModalProps) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ duration: 0.25 }}
-            className="relative z-10 w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/20 bg-white/85 shadow-2xl shadow-slate-950/30 backdrop-blur-2xl"
+            className="relative z-10 w-full max-w-[92vw] sm:max-w-3xl md:max-w-4xl lg:max-w-5xl overflow-hidden rounded-[1.25rem] border border-white/20 bg-white/95 shadow-2xl shadow-slate-950/30 backdrop-blur-2xl max-h-[90vh]"
           >
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.15),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(124,58,237,0.14),transparent_32%)]" />
 
-            <div className="relative grid lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="relative grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr]">
               <div className="p-6 sm:p-8 lg:p-10 bg-slate-950 text-white">
                 <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-white/80">
                   Premium Order Form
@@ -187,7 +187,7 @@ const OrderModal = ({ isOpen, onClose, defaultService }: OrderModalProps) => {
                 </button>
 
                 {submitted ? (
-                  <div className="flex min-h-[520px] flex-col items-center justify-center text-center">
+                  <div className="flex min-h-[420px] sm:min-h-[520px] flex-col items-center justify-center text-center">
                     <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
                       <CheckCircle2 size={36} />
                     </div>
@@ -204,7 +204,7 @@ const OrderModal = ({ isOpen, onClose, defaultService }: OrderModalProps) => {
                     </button>
                   </div>
                 ) : (
-                  <form className="space-y-4 sm:space-y-5" onSubmit={handleSubmit}>
+                  <form className="space-y-4 sm:space-y-5 overflow-auto" onSubmit={handleSubmit}>
                     <div className="grid gap-4 sm:grid-cols-2">
                       <Field label="Owner Name" name="ownerName" placeholder="Your name" required />
                       <Field label="Business Name" name="businessName" placeholder="Your brand or company" required />
