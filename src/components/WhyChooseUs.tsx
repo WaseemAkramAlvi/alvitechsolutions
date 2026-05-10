@@ -73,7 +73,7 @@ const WhyChooseUs = () => {
                 className="p-6 md:p-8 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 text-center hover:shadow-lg transition-all"
               >
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-primary/10 text-primary rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4">
-                  <stat.icon size={20} className="md:w-6 md:h-6" />
+                  <stat.icon size={20} className="md:w-6 md:h-6" aria-hidden="true" />
                 </div>
                 <div className="text-2xl md:text-3xl font-bold text-slate-900 mb-1">
                   <AnimatedNumber target={stat.value} />{stat.suffix}
