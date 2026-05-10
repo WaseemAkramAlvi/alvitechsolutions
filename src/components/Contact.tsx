@@ -29,7 +29,7 @@ const Contact = () => {
             <div className="space-y-6 md:space-y-8">
               <div className="flex items-start gap-4 md:gap-6">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-primary/10 text-primary rounded-xl md:rounded-2xl flex items-center justify-center shrink-0">
-                  <Mail size={20} className="md:w-6 md:h-6" />
+                  <Mail size={20} className="md:w-6 md:h-6" aria-hidden="true" />
                 </div>
                 <div>
                   <div className="font-bold text-slate-900 mb-1 text-base md:text-lg">Email Us</div>
@@ -39,7 +39,7 @@ const Contact = () => {
               
               <div className="flex items-start gap-4 md:gap-6">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-primary/10 text-primary rounded-xl md:rounded-2xl flex items-center justify-center shrink-0">
-                  <Phone size={20} className="md:w-6 md:h-6" />
+                  <Phone size={20} className="md:w-6 md:h-6" aria-hidden="true" />
                 </div>
                 <div>
                   <div className="font-bold text-slate-900 mb-1 text-base md:text-lg">Call Us</div>
@@ -49,7 +49,7 @@ const Contact = () => {
 
               <div className="flex items-start gap-4 md:gap-6">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-primary/10 text-primary rounded-xl md:rounded-2xl flex items-center justify-center shrink-0">
-                  <MapPin size={20} className="md:w-6 md:h-6" />
+                  <MapPin size={20} className="md:w-6 md:h-6" aria-hidden="true" />
                 </div>
                 <div>
                   <div className="font-bold text-slate-900 mb-1 text-base md:text-lg">Visit Us</div>
@@ -68,26 +68,30 @@ const Contact = () => {
             <form className="space-y-4 md:space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 ml-1">Full Name</label>
+                  <label htmlFor="contact-full-name" className="text-sm font-bold text-slate-700 ml-1">Full Name</label>
                   <input
+                    id="contact-full-name"
                     type="text"
                     placeholder="John Doe"
                     className="w-full px-5 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
+                    required
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 ml-1">Email Address</label>
+                  <label htmlFor="contact-email" className="text-sm font-bold text-slate-700 ml-1">Email Address</label>
                   <input
+                    id="contact-email"
                     type="email"
                     placeholder="john@company.com"
                     className="w-full px-5 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
+                    required
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 ml-1">Business Type</label>
-                <select className="w-full px-5 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all appearance-none">
+                <label htmlFor="contact-business-type" className="text-sm font-bold text-slate-700 ml-1">Business Type</label>
+                <select id="contact-business-type" className="w-full px-5 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all appearance-none">
                   <option>Startup</option>
                   <option>Small Business</option>
                   <option>Enterprise</option>
@@ -96,17 +100,19 @@ const Contact = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 ml-1">Your Message</label>
+                <label htmlFor="contact-message" className="text-sm font-bold text-slate-700 ml-1">Your Message</label>
                 <textarea
+                  id="contact-message"
                   rows={4}
                   placeholder="Tell us about your project..."
                   className="w-full px-5 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all resize-none"
+                  required
                 />
               </div>
 
               <button className="w-full bg-primary text-white py-4 md:py-5 rounded-xl md:rounded-2xl font-bold text-base md:text-lg flex items-center justify-center gap-2 hover:bg-primary-dark transition-all hover:shadow-xl hover:shadow-primary/20 active:scale-95">
                 Send Message
-                <Send size={20} />
+                <Send size={20} aria-hidden="true" />
               </button>
             </form>
           </motion.div>
@@ -118,9 +124,10 @@ const Contact = () => {
         href="https://wa.me/923075579807"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Chat with us on WhatsApp"
         className="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-14 h-14 md:w-16 md:h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-50 group"
       >
-        <WhatsAppIcon size={28} />
+        <WhatsAppIcon size={28} aria-hidden="true" />
         <span className="hidden md:block absolute right-full mr-4 bg-white text-slate-900 px-4 py-2 rounded-xl text-sm font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
           Chat with us!
         </span>

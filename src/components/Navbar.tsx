@@ -81,7 +81,7 @@ const Navbar = ({ onOpenOrderModal }: NavbarProps) => {
                 : "bg-primary/10 text-primary hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/30"
             )}
           >
-            <Sparkles size={16} className={location.pathname.startsWith('/ai-tools') || location.pathname === '/cv-builder' ? "animate-pulse" : ""} />
+            <Sparkles size={16} className={location.pathname.startsWith('/ai-tools') || location.pathname === '/cv-builder' ? "animate-pulse" : ""} aria-hidden="true" />
             Free AI Tools
           </Link>
           <Link
@@ -93,7 +93,7 @@ const Navbar = ({ onOpenOrderModal }: NavbarProps) => {
                 : "bg-secondary/10 text-secondary hover:bg-secondary hover:text-white hover:shadow-lg hover:shadow-secondary/25"
             )}
           >
-            <FileText size={16} className={location.pathname === '/cv-builder' ? "animate-pulse" : ""} />
+            <FileText size={16} className={location.pathname === '/cv-builder' ? "animate-pulse" : ""} aria-hidden="true" />
             CV Making
           </Link>
           <button
@@ -106,10 +106,13 @@ const Navbar = ({ onOpenOrderModal }: NavbarProps) => {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden text-slate-900"
+          className="md:hidden text-slate-900 p-2 hover:bg-slate-100 rounded-lg transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-nav"
         >
-          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          {isMobileMenuOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
         </button>
       </div>
 
@@ -117,6 +120,7 @@ const Navbar = ({ onOpenOrderModal }: NavbarProps) => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
+            id="mobile-nav"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -138,7 +142,7 @@ const Navbar = ({ onOpenOrderModal }: NavbarProps) => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex items-center justify-center gap-2 text-lg font-bold text-primary bg-primary/10 hover:bg-primary hover:text-white transition-colors py-3 rounded-xl border border-primary/20 hover:border-primary shadow-sm"
               >
-                <Sparkles size={20} />
+                <Sparkles size={20} aria-hidden="true" />
                 Free AI Tools
               </Link>
               <Link
@@ -146,7 +150,7 @@ const Navbar = ({ onOpenOrderModal }: NavbarProps) => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex items-center justify-center gap-2 text-lg font-bold text-secondary bg-secondary/10 hover:bg-secondary hover:text-white transition-colors py-3 rounded-xl border border-secondary/20 hover:border-secondary shadow-sm"
               >
-                <FileText size={20} />
+                <FileText size={20} aria-hidden="true" />
                 CV Making
               </Link>
               <button

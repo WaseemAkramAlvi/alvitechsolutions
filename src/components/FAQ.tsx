@@ -52,9 +52,10 @@ const FAQ = () => {
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? -1 : index)}
                   className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                  aria-expanded={isOpen}
                 >
                   <span className="text-base md:text-lg font-bold text-slate-900">{faq.question}</span>
-                  <ChevronDown className={`shrink-0 text-primary transition-transform ${isOpen ? 'rotate-180' : ''}`} size={22} />
+                  <ChevronDown className={`shrink-0 text-primary transition-transform ${isOpen ? 'rotate-180' : ''}`} size={22} aria-hidden="true" />
                 </button>
 
                 <AnimatePresence initial={false}>

@@ -110,7 +110,7 @@ const Pricing = ({ onOpenOrderModal }: PricingProps) => {
                       "mt-1 w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center shrink-0",
                       plan.popular ? "bg-primary/20 text-primary" : "bg-primary/10 text-primary"
                     )}>
-                      <Check size={10} strokeWidth={3} />
+                      <Check size={10} strokeWidth={3} aria-hidden="true" />
                     </div>
                     <span className="text-xs md:text-sm font-medium">{feature}</span>
                   </div>
@@ -132,7 +132,7 @@ const Pricing = ({ onOpenOrderModal }: PricingProps) => {
                 )}
               >
                 Order Now
-                <ArrowRight size={18} />
+                <ArrowRight size={18} aria-hidden="true" />
               </button>
             </motion.div>
           ))}

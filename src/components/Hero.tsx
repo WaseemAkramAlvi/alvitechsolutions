@@ -27,7 +27,7 @@ const Hero = ({ onOpenOrderModal }: HeroProps) => {
           className="text-center lg:text-left"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 text-secondary text-[10px] md:text-xs font-bold uppercase tracking-wider mb-6 shadow-lg shadow-slate-200/50 border border-white/70">
-            <Sparkles size={14} />
+            <Sparkles size={14} aria-hidden="true" />
             Premium Digital Services
           </div>
 
@@ -45,7 +45,7 @@ const Hero = ({ onOpenOrderModal }: HeroProps) => {
               className="w-full sm:w-auto bg-gradient-to-r from-primary to-secondary text-white px-10 py-4 rounded-full font-extrabold flex items-center justify-center gap-3 hover:opacity-95 transition-all hover:shadow-2xl shadow-primary/20 group"
             >
               Order Now
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
             </button>
 
             <button
@@ -58,15 +58,15 @@ const Hero = ({ onOpenOrderModal }: HeroProps) => {
 
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-6">
             <div className="flex items-center gap-2 text-xs md:text-sm font-medium text-slate-500">
-              <CheckCircle2 size={16} className="text-emerald-500" />
+              <CheckCircle2 size={16} className="text-emerald-500" aria-hidden="true" />
               Fast Delivery
             </div>
             <div className="flex items-center gap-2 text-xs md:text-sm font-medium text-slate-500">
-              <CheckCircle2 size={16} className="text-emerald-500" />
+              <CheckCircle2 size={16} className="text-emerald-500" aria-hidden="true" />
               Conversion Focused
             </div>
             <div className="flex items-center gap-2 text-xs md:text-sm font-medium text-slate-500">
-              <CheckCircle2 size={16} className="text-emerald-500" />
+              <CheckCircle2 size={16} className="text-emerald-500" aria-hidden="true" />
               Mobile First
             </div>
           </div>

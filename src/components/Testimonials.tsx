@@ -46,11 +46,11 @@ const Testimonials = () => {
               transition={{ delay: index * 0.1 }}
               className="p-8 rounded-3xl bg-slate-50 border border-slate-100 relative"
             >
-              <Quote className="absolute top-6 right-8 text-primary/10" size={60} />
+              <Quote className="absolute top-6 right-8 text-primary/10" size={60} aria-hidden="true" />
               
               <div className="flex gap-1 mb-6">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} className="fill-amber-400 text-amber-400" />
+                  <Star key={i} size={16} className="fill-amber-400 text-amber-400" aria-hidden="true" />
                 ))}
               </div>
               

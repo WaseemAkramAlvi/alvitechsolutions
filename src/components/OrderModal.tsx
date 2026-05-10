@@ -210,7 +210,7 @@ ${attachmentText}
                       <div className="space-y-2">
                         <label className="text-sm font-bold text-slate-700 ml-1">Upload Reference File/Image</label>
                         <label className="flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-5 py-4 text-sm text-slate-600 transition hover:border-primary hover:bg-primary/5">
-                          <Upload size={18} className="shrink-0 text-primary" />
+                          <Upload size={18} className="shrink-0 text-primary" aria-hidden="true" />
                           <span className="truncate">{selectedFileName}</span>
                           <input
                             type="file"
@@ -221,6 +221,7 @@ ${attachmentText}
                               const file = event.target.files?.[0];
                               setSelectedFileName(file ? file.name : 'No file selected');
                             }}
+                            aria-label="Upload reference file"
                           />
                         </label>
                       </div>

@@ -96,7 +96,7 @@ const Services = () => {
               className="p-6 md:p-8 rounded-2xl md:rounded-3xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all group"
             >
               <div className={`w-12 h-12 md:w-14 md:h-14 ${service.color} rounded-xl md:rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
-                <service.icon size={24} className="md:w-7 md:h-7" />
+                <service.icon size={24} className="md:w-7 md:h-7" aria-hidden="true" />
               </div>
               <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 group-hover:text-primary transition-colors">
                 {service.title}

@@ -48,7 +48,7 @@ const CTA = ({ onOpenOrderModal }: CTAProps) => {
               className="bg-white text-primary px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:bg-slate-50 transition-all hover:shadow-xl active:scale-95 flex items-center justify-center gap-2"
             >
               Order Now
-              <ArrowRight size={22} />
+              <ArrowRight size={22} aria-hidden="true" />
             </button>
             <button
               onClick={() => scrollToSection('services')}

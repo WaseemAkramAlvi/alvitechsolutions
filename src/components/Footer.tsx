@@ -24,9 +24,10 @@ const Footer = () => {
                 <a
                   key={i}
                   href="#"
+                  aria-label={Icon.name || 'Social media link'}
                   className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
                 >
-                  <Icon size={18} />
+                  <Icon size={18} aria-hidden="true" />
                 </a>
               ))}
             </div>
@@ -69,9 +70,10 @@ const Footer = () => {
                 type="email"
                 placeholder="Email address"
                 className="bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm flex-1 outline-none focus:border-primary transition-colors"
+                aria-label="Email address for newsletter"
               />
-              <button className="bg-primary text-white p-3 rounded-xl hover:bg-primary-dark transition-colors">
-                <Rocket size={18} />
+              <button className="bg-primary text-white p-3 rounded-xl hover:bg-primary-dark transition-colors" aria-label="Subscribe to newsletter">
+                <Rocket size={18} aria-hidden="true" />
               </button>
             </div>
           </div>
